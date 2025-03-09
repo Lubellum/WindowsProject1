@@ -1,2 +1,18 @@
 ﻿  Matrix.cpp
+  main.cpp
+  コードを生成中...
+glew32s.lib(glew.obj) : warning LNK4099: PDB '' が 'glew32s.lib(glew.obj)' で、または '' に見つかりません。デバッグ情報がないものとして、オブジェクトにリンクします。
+LINK : warning LNK4098: defaultlib 'MSVCRT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
+LINK : warning LNK4098: defaultlib 'LIBCMT' は他のライブラリの使用と競合しています。/NODEFAULTLIB:library を使用してください。
+LINK : warning LNK4217: シンボル '__glewBindBuffer' ('glew32s.lib(glew.obj)' で定義) が 'Object.obj' によって関数 '"public: __cdecl CObject::CObject(int,int,struct CObject::tVertex const *)" (??0CObject@@QEAA@HHPEBUtVertex@0@@Z)' 内でインポートされています
+LINK : warning LNK4217: シンボル '__glewBufferData' ('glew32s.lib(glew.obj)' で定義) が 'Object.obj' によって関数 '"public: __cdecl CObject::CObject(int,int,struct CObject::tVertex const *)" (??0CObject@@QEAA@HHPEBUtVertex@0@@Z)' 内でインポートされています
+LINK : warning LNK4217: シンボル '__glewDeleteBuffers' ('glew32s.lib(glew.obj)' で定義) が 'Object.obj' によって関数 '"public: virtual __cdecl CObject::~CObject(void)" (??1CObject@@UEAA@XZ)' 内でインポートされています
+LINK : warning LNK4217: シンボル '__glewGenBuffers' ('glew32s.lib(glew.obj)' で定義) が 'Object.obj' によって関数 '"public: __cdecl CObject::CObject(int,int,struct CObject::tVertex const *)" (??0CObject@@QEAA@HHPEBUtVertex@0@@Z)' 内でインポートされています
+LINK : warning LNK4217: シンボル '__glewEnableVertexAttribArray' ('glew32s.lib(glew.obj)' で定義) が 'Object.obj' によって関数 '"public: __cdecl CObject::CObject(int,int,struct CObject::tVertex const *)" (??0CObject@@QEAA@HHPEBUtVertex@0@@Z)' 内でインポートされています
+LINK : warning LNK4217: シンボル '__glewVertexAttribPointer' ('glew32s.lib(glew.obj)' で定義) が 'Object.obj' によって関数 '"public: __cdecl CObject::CObject(int,int,struct CObject::tVertex const *)" (??0CObject@@QEAA@HHPEBUtVertex@0@@Z)' 内でインポートされています
+LINK : warning LNK4217: シンボル '__glewBindVertexArray' ('glew32s.lib(glew.obj)' で定義) が 'Object.obj' によって関数 '"public: __cdecl CObject::CObject(int,int,struct CObject::tVertex const *)" (??0CObject@@QEAA@HHPEBUtVertex@0@@Z)' 内でインポートされています
+LINK : warning LNK4217: シンボル '__glewDeleteVertexArrays' ('glew32s.lib(glew.obj)' で定義) が 'Object.obj' によって関数 '"public: virtual __cdecl CObject::~CObject(void)" (??1CObject@@UEAA@XZ)' 内でインポートされています
+LINK : warning LNK4217: シンボル '__glewGenVertexArrays' ('glew32s.lib(glew.obj)' で定義) が 'Object.obj' によって関数 '"public: __cdecl CObject::CObject(int,int,struct CObject::tVertex const *)" (??0CObject@@QEAA@HHPEBUtVertex@0@@Z)' 内でインポートされています
+LINK : warning LNK4217: シンボル 'glewInit' ('glew32s.lib(glew.obj)' で定義) が 'Window.obj' によって関数 '"public: void __cdecl CWindow::Initialize(void)" (?Initialize@CWindow@@QEAAXXZ)' 内でインポートされています
+LINK : warning LNK4217: シンボル 'glewExperimental' ('glew32s.lib(glew.obj)' で定義) が 'Window.obj' によって関数 '"public: void __cdecl CWindow::Initialize(void)" (?Initialize@CWindow@@QEAAXXZ)' 内でインポートされています
   WindowsProject1.vcxproj -> C:\Users\azuky\OneDrive\ドキュメント\GitHub\WindowsProject1\x64\Debug\WindowsProject1.exe

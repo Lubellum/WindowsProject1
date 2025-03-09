@@ -67,3 +67,43 @@ CMatrix CMatrix::Translate(const GLfloat aX, const GLfloat aY, const GLfloat aZ)
 
     return t;
 }
+
+// (x, y, z) ”{‚ÉŠg‘åk¬‚·‚é•ÏŠ·s—ñ‚ðì¬‚·‚é
+CMatrix CMatrix::Scale(const GLfloat aX, const GLfloat aY, const GLfloat aZ)
+{
+    CMatrix t;
+    t.LoadIdentity();
+    t[0] = aX;
+    t[5] = aY;
+    t[10] = aZ;
+
+    return t;
+}
+
+// (x, y, z) ‚ðŽ²‚É a ‰ñ“]‚·‚é•ÏŠ·s—ñ‚ðì¬‚·‚é
+CMatrix CMatrix::Rotate(const GLfloat aA, const GLfloat aX, const GLfloat aY, const GLfloat aZ)
+{
+    CMatrix t;
+    const GLfloat d(sqrt(aX * aX + aY * aY + aZ * aZ));
+
+    if (d > 0.0f)
+    {
+        const GLfloat l(aX / d), m(aY / d), n(aZ / d);
+        const GLfloat l2(l * l), m2(m * m), n2(n * n);
+        const GLfloat lm(l * m), mn(m * n), nl(n * l);
+        const GLfloat c(cos(aA)), c1(1.0f - c), s(sin(aA));
+
+        t.LoadIdentity();
+        t[0] = (1.0f - l2) * c + l2;
+        t[1] = lm * c1 + n * s;
+        t[2] = nl * c1 - m * s;
+        t[4] = lm * c1 - n * s;
+        t[5] = (1.0f - m2) * c + m2;
+        t[6] = mn * c1 + l * s;
+        t[8] = nl * c1 + m * s;
+        t[9] = mn * c1 - l * s;
+        t[10] = (1.0f - n2) * c + n2;
+    }
+
+    return t;
+}

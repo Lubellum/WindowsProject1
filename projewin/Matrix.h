@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <GL/glew.h>
+#include <cmath>
 
 // •ÏŠ·s—ñ
 class CMatrix
@@ -30,6 +31,12 @@ public:
 
 	// (x, y, z) ‚¾‚¯•½sˆÚ“®‚·‚é•ÏŠ·s—ñ‚ğì¬‚·‚é
 	static CMatrix Translate(const GLfloat aX, const GLfloat aY, const GLfloat aZ);
+
+	// (x, y, z) ”{‚ÉŠg‘åk¬‚·‚é•ÏŠ·s—ñ‚ğì¬‚·‚é
+	static CMatrix Scale(const GLfloat aX, const GLfloat aY,const GLfloat aZ);
+
+	// (x, y, z) ‚ğ²‚É a ‰ñ“]‚·‚é•ÏŠ·s—ñ‚ğì¬‚·‚é
+	static CMatrix Rotate(const GLfloat aA, const GLfloat aX, const GLfloat aY, const GLfloat aZ);
 
 private:
 	GLfloat matrix[16];
