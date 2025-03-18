@@ -38,7 +38,10 @@ public:
 	// (x, y, z) ‚ğ²‚É a ‰ñ“]‚·‚é•ÏŠ·s—ñ‚ğì¬‚·‚é
 	static CMatrix Rotate(const GLfloat aA, const GLfloat aX, const GLfloat aY, const GLfloat aZ);
 
+	// æZ
+	CMatrix operator*(const CMatrix& aMatrix) const;
+
 private:
-	GLfloat matrix[16];
+	GLfloat mMatrix[16];
 
 };

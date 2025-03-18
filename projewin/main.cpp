@@ -178,6 +178,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         window->SwapBuffers();
         glfwPollEvents();
         //glfwWaitEvents();
+        
+        //Sleep(16); お試し
     }
 
 

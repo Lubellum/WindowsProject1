@@ -13,7 +13,7 @@ CMatrix::CMatrix()
 // 0 0 0 1  m3 m7 m11 m15
 CMatrix::CMatrix(const GLfloat* a)
 {
-    std::copy(a, a + 16, matrix);
+    std::copy(a, a + 16, mMatrix);
 }
 
 CMatrix::~CMatrix()
@@ -23,29 +23,29 @@ CMatrix::~CMatrix()
 // 行列の要素を右辺値として参照する
 const GLfloat& CMatrix::operator[](std::size_t i) const
 {
-    return matrix[i];
+    return mMatrix[i];
 }
 
 // 行列の要素を左辺値として参照する
 GLfloat& CMatrix::operator[](std::size_t i)
 {
-    return matrix[i];
+    return mMatrix[i];
 }
 
 // 変換行列の配列を返す
 const GLfloat* CMatrix::Data() const
 {
-    return matrix;
+    return mMatrix;
 }
 
 // 単位行列を設定する
 void CMatrix::LoadIdentity()
 {
-    std::fill(matrix, matrix + 16, 0.0f);
-    matrix[0] = 1.0f;
-    matrix[5] = 1.0f;
-    matrix[10] = 1.0f;
-    matrix[15] = 1.0f;
+    std::fill(mMatrix, mMatrix + 16, 0.0f);
+    mMatrix[0] = 1.0f;
+    mMatrix[5] = 1.0f;
+    mMatrix[10] = 1.0f;
+    mMatrix[15] = 1.0f;
 }
 
 // 単位行列を作成する static
@@ -103,6 +103,29 @@ CMatrix CMatrix::Rotate(const GLfloat aA, const GLfloat aX, const GLfloat aY, co
         t[8] = nl * c1 + m * s;
         t[9] = mn * c1 - l * s;
         t[10] = (1.0f - n2) * c + n2;
+    }
+
+    return t;
+}
+
+CMatrix CMatrix::operator*(const CMatrix& aMatrix) const
+{
+    CMatrix t;
+
+    for (int column = 0; column < 4; column++)
+    {
+        for (int row = 0; row < 4; row++)
+        {
+            const int columnRow = ((column * 4) + row);
+
+            GLfloat dot = 0.0f;
+            for (int k = 0; k < 4; k++)
+            {
+                dot += mMatrix[((k * 4) + row)] * aMatrix[((column * 4) + k)];
+            }
+
+            t[columnRow] = dot;
+        }
     }
 
     return t;
