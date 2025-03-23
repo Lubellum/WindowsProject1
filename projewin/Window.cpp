@@ -12,7 +12,7 @@ CWindow::~CWindow()
 void CWindow::Initialize()
 {
     mWindow = glfwCreateWindow(1920, 1080, "Sample", nullptr, nullptr);
-    mScale = 100.0f; //1を100ドットで表現
+    mScale = 100.0f; //1(今の四角形の大きさ)を100ドットで表現
     mLocation[0] = 0.0f;
     mLocation[1] = 0.0f;
 

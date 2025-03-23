@@ -156,9 +156,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // uniform 変数の場所を取得する
     glLinkProgram(program);
     //const GLint aspectLoc = glGetUniformLocation(program, "aspect");
-    const GLint sizeLoc = glGetUniformLocation(program, "size");
-    const GLint scaleLoc = glGetUniformLocation(program, "scale");
-    const GLint locationLoc = glGetUniformLocation(program, "location");
+    // const GLint sizeLoc = glGetUniformLocation(program, "size");
+    // const GLint scaleLoc = glGetUniformLocation(program, "scale");
+    // const GLint locationLoc = glGetUniformLocation(program, "location");
+    const GLint modelLoc = glGetUniformLocation(program, "model");
 
     // todo:
     Shape * shape = new Shape( 2, 4, vertex);
@@ -169,11 +170,27 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         glLineWidth(5.0);
         glUseProgram(program);
-        //glUniform1f(aspectLoc, window->GetAspect());
         window->Update();
-        glUniform2fv(sizeLoc, 1, window->GetSize());
-        glUniform1f(scaleLoc, window->GetScale());
-        glUniform2fv(locationLoc, 1, window->GetLocation());
+        //glUniform1f(aspectLoc, window->GetAspect());
+        // glUniform2fv(sizeLoc, 1, window->GetSize());
+        // glUniform1f(scaleLoc, window->GetScale());
+        // glUniform2fv(locationLoc, 1, window->GetLocation());
+        // 
+        // 拡大縮小の変換行列を求める
+        const GLfloat* const size = window->GetSize();
+        const GLfloat scale = (window->GetScale() * 2.0f);
+        const CMatrix scaling = CMatrix::Scale(scale / size[0], scale / size[1], 1.0f);
+
+        // 平行移動の変換行列を求める
+        const GLfloat* const position = window->GetLocation();
+        const CMatrix translation = CMatrix::Translate(position[0], position[1], 0.0f);
+
+        // モデル変換行列を求める
+        const CMatrix model = translation * scaling;
+
+        // uniform 変数に値を設定する
+        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model.Data());
+
         shape->Draw();
         window->SwapBuffers();
         glfwPollEvents();
