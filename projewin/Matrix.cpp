@@ -132,9 +132,57 @@ CMatrix CMatrix::operator*(const CMatrix& aMatrix) const
 }
 
 // ビュー変換行列を作成する
-static CMatrix LookAt(GLfloat aEx, GLfloat aEy, GLfloat aEz,  // 視点の位置
-                      GLfloat aGx, GLfloat aGy, GLfloat aGz,  // 目標点の位置
-                      GLfloat aUx, GLfloat aUy, GLfloat aUz)  // 上方向のベクトル
+CMatrix CMatrix::LookAt(GLfloat aEx, GLfloat aEy, GLfloat aEz,  // 視点の位置
+    GLfloat aGx, GLfloat aGy, GLfloat aGz,  // 目標点の位置
+    GLfloat aUx, GLfloat aUy, GLfloat aUz)  // 上方向のベクトル
 {
-    
+    // 平行移動の変換行列
+    const CMatrix tv = Translate(-aEx, -aEy, -aEz);
+
+    // t 軸 = e - g
+    const GLfloat tx = (aEx - aGx);
+    const GLfloat ty = (aEy - aGy);
+    const GLfloat tz = (aEz - aGz);
+
+    // r 軸 = u x t 軸
+    const GLfloat rx = ((aUy * tz) - (aUz * ty));
+    const GLfloat ry = ((aUz * tx) - (aUx * tz));
+    const GLfloat rz = ((aUx * ty) - (aUy * tx));
+
+    // s 軸 = t 軸 x r 軸
+    const GLfloat sx = ((ty * rz) - (tz * ry));
+    const GLfloat sy = ((tz * rx) - (tx * rz));
+    const GLfloat sz = ((tx * ry) - (ty * rx));
+
+    // s 軸の長さのチェック
+    const GLfloat s2 = ((sx * sx) + (sy * sy) + (sz * sz));
+    if (s2 == 0.0f)
+    {
+        return tv;
+    }
+
+    // 回転の変換行列
+    CMatrix rv;
+    rv.LoadIdentity();
+
+    // r 軸を正規化して配列変数に格納
+    const GLfloat r = sqrt((rx * rx) + (ry * ry) + (rz * rz));
+    rv[0] = rx / r;
+    rv[4] = ry / r;
+    rv[8] = rz / r;
+
+    // s 軸を正規化して配列変数に格納
+    const GLfloat s = sqrt(s2);
+    rv[1] = sx / s;
+    rv[5] = sy / s;
+    rv[9] = sz / s;
+
+    // t 軸を正規化して配列変数に格納
+    const GLfloat t = sqrt((tx * tx) + (ty * ty) + (tz * tz));
+    rv[2] = tx / t;
+    rv[6] = ty / t;
+    rv[10] = tz / t;
+
+    // 視点の平行移動の変換行列に視線の回転の変換行列を乗じる
+    return rv * tv;
 }

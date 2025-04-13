@@ -160,6 +160,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // const GLint scaleLoc = glGetUniformLocation(program, "scale");
     // const GLint locationLoc = glGetUniformLocation(program, "location");
     const GLint modelLoc = glGetUniformLocation(program, "model");
+    const GLint modelViewLoc = glGetUniformLocation(program, "modelView");
 
     // todo:
     Shape * shape = new Shape( 2, 4, vertex);
@@ -188,8 +189,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // モデル変換行列を求める
         const CMatrix model = translation * scaling;
 
+        // ビュー変換行列を求める
+        const CMatrix view = CMatrix::LookAt(
+             0.0f,  0.0f,  0.0f,
+            -1.0f, -1.0f, -1.0f,
+             0.0f,  1.0f,  0.0f
+        );
+
+        // モデルビュー変換行列を求める
+        const CMatrix modelView = view * model;
+
         // uniform 変数に値を設定する
-        glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model.Data());
+        //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model.Data());
+        glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelView.Data());
 
         shape->Draw();
         window->SwapBuffers();
