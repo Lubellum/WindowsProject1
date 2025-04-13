@@ -41,6 +41,11 @@ public:
 	// 乗算
 	CMatrix operator*(const CMatrix& aMatrix) const;
 
+	// ビュー変換行列を作成する
+	static CMatrix LookAt(GLfloat aEx, GLfloat aEy, GLfloat aEz,  // 視点の位置
+						  GLfloat aGx, GLfloat aGy, GLfloat aGz,  // 目標点の位置
+						  GLfloat aUx, GLfloat aUy, GLfloat aUz); // 上方向のベクトル
+
 private:
 	GLfloat mMatrix[16];
 
