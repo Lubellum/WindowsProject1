@@ -161,6 +161,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // const GLint locationLoc = glGetUniformLocation(program, "location");
     const GLint modelLoc = glGetUniformLocation(program, "model");
     const GLint modelViewLoc = glGetUniformLocation(program, "modelView");
+    const GLint projectionLoc = glGetUniformLocation(program, "projection");
 
     // todo:
     Shape * shape = new Shape( 2, 4, vertex);
@@ -178,29 +179,41 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // glUniform2fv(locationLoc, 1, window->GetLocation());
         // 
         // 拡大縮小の変換行列を求める
+         // 直交投影変換行列を求める
         const GLfloat* const size = window->GetSize();
         const GLfloat scale = (window->GetScale() * 2.0f);
         const CMatrix scaling = CMatrix::Scale(scale / size[0], scale / size[1], 1.0f);
+        const GLfloat w = (size[0] / scale);
+        const GLfloat h = (size[1] / scale);
+        const CMatrix projection = CMatrix::Orthogonal(-w, w, -h, h, 1.0f, 10.0f);
 
         // 平行移動の変換行列を求める
         const GLfloat* const position = window->GetLocation();
         const CMatrix translation = CMatrix::Translate(position[0], position[1], 0.0f);
 
         // モデル変換行列を求める
-        const CMatrix model = translation * scaling;
+        //const CMatrix model = translation * scaling;
+        const GLfloat* const location = window->GetLocation();
+        const CMatrix model = CMatrix::Translate(location[0], location[1], 0.0f);
 
         // ビュー変換行列を求める
+        //const CMatrix view = CMatrix::LookAt(
+        //     0.0f,  0.0f,  0.0f,
+        //    -1.0f, -1.0f, -1.0f,
+        //     0.0f,  1.0f,  0.0f
+        //);
+
         const CMatrix view = CMatrix::LookAt(
-             0.0f,  0.0f,  0.0f,
-            -1.0f, -1.0f, -1.0f,
-             0.0f,  1.0f,  0.0f
+            3.0f, 4.0f, 5.0f,
+            0.0f, 0.0f, 0.0f,
+            0.0f, 1.0f, 0.0f
         );
 
         // モデルビュー変換行列を求める
         const CMatrix modelView = view * model;
 
         // uniform 変数に値を設定する
-        //glUniformMatrix4fv(modelLoc, 1, GL_FALSE, model.Data());
+        glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projection.Data());
         glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelView.Data());
 
         shape->Draw();

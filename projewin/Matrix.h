@@ -46,6 +46,10 @@ public:
 						  GLfloat aGx, GLfloat aGy, GLfloat aGz,  // 目標点の位置
 						  GLfloat aUx, GLfloat aUy, GLfloat aUz); // 上方向のベクトル
 
+	static CMatrix Orthogonal(GLfloat aLeft, GLfloat aRight,
+							  GLfloat aBottom, GLfloat aTop,
+							  GLfloat aZNear, GLfloat aZFar);
+
 private:
 	GLfloat mMatrix[16];
 

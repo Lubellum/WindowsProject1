@@ -133,8 +133,8 @@ CMatrix CMatrix::operator*(const CMatrix& aMatrix) const
 
 // ビュー変換行列を作成する
 CMatrix CMatrix::LookAt(GLfloat aEx, GLfloat aEy, GLfloat aEz,  // 視点の位置
-    GLfloat aGx, GLfloat aGy, GLfloat aGz,  // 目標点の位置
-    GLfloat aUx, GLfloat aUy, GLfloat aUz)  // 上方向のベクトル
+                        GLfloat aGx, GLfloat aGy, GLfloat aGz,  // 目標点(注視点)の位置
+                        GLfloat aUx, GLfloat aUy, GLfloat aUz)  // 上方向のベクトル(カメラの向き)
 {
     // 平行移動の変換行列
     const CMatrix tv = Translate(-aEx, -aEy, -aEz);
@@ -167,22 +167,76 @@ CMatrix CMatrix::LookAt(GLfloat aEx, GLfloat aEy, GLfloat aEz,  // 視点の位置
 
     // r 軸を正規化して配列変数に格納
     const GLfloat r = sqrt((rx * rx) + (ry * ry) + (rz * rz));
-    rv[0] = rx / r;
-    rv[4] = ry / r;
-    rv[8] = rz / r;
+    rv[0] = (rx / r);
+    rv[4] = (ry / r);
+    rv[8] = (rz / r);
 
     // s 軸を正規化して配列変数に格納
     const GLfloat s = sqrt(s2);
-    rv[1] = sx / s;
-    rv[5] = sy / s;
-    rv[9] = sz / s;
+    rv[1] = (sx / s);
+    rv[5] = (sy / s);
+    rv[9] = (sz / s);
 
     // t 軸を正規化して配列変数に格納
     const GLfloat t = sqrt((tx * tx) + (ty * ty) + (tz * tz));
-    rv[2] = tx / t;
-    rv[6] = ty / t;
-    rv[10] = tz / t;
+    rv[2] = (tx / t);
+    rv[6] = (ty / t);
+    rv[10] = (tz / t);
 
     // 視点の平行移動の変換行列に視線の回転の変換行列を乗じる
     return rv * tv;
+}
+
+CMatrix CMatrix::Orthogonal(GLfloat aLeft, GLfloat aRight,
+                            GLfloat aBottom, GLfloat aTop,
+                            GLfloat aZNear, GLfloat aZFar)
+{
+    CMatrix t;
+    const GLfloat dx = (aRight - aLeft);
+    const GLfloat dy = (aTop - aBottom);
+    const GLfloat dz = (aZFar - aZNear);
+
+    // if文パターン1
+    if (dx != 0.0f)
+    {
+        if (dy != 0.0f)
+        {
+            if (dz != 0.0f)
+            {
+                t[0] = (2.0f / dx);
+                t[5] = (2.0f / dy);
+                t[10] = -(2.0f / dz);
+                t[12] = -((aRight + aLeft) / dx);
+                t[13] = -((aTop + aBottom) / dy);
+                t[14] = -((aZFar + aZNear) / dz);
+            }
+        }
+    }
+    return t;
+
+    // if文パターン2
+    // 関数化するために抜き出しやすい
+    if (dx == 0.0f)
+    {
+        return t;
+    }
+
+    if (dy == 0.0f)
+    {
+        return t;
+    }
+
+    if (dz == 0.0f)
+    {
+        return t;
+    }
+    
+    t[0] = (2.0f / dx);
+    t[5] = (2.0f / dy);
+    t[10] = -(2.0f / dz);
+    t[12] = -((aRight + aLeft) / dx);
+    t[13] = -((aTop + aBottom) / dy);
+    t[14] = -((aZFar + aZNear) / dz);
+
+    return t;
 }
