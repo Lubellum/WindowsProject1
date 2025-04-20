@@ -196,41 +196,66 @@ CMatrix CMatrix::Orthogonal(GLfloat aLeft, GLfloat aRight,
     const GLfloat dy = (aTop - aBottom);
     const GLfloat dz = (aZFar - aZNear);
 
-    // if文パターン1
-    if (dx != 0.0f)
-    {
-        if (dy != 0.0f)
-        {
-            if (dz != 0.0f)
-            {
-                t[0] = (2.0f / dx);
-                t[5] = (2.0f / dy);
-                t[10] = -(2.0f / dz);
-                t[12] = -((aRight + aLeft) / dx);
-                t[13] = -((aTop + aBottom) / dy);
-                t[14] = -((aZFar + aZNear) / dz);
-            }
-        }
-    }
-    return t;
+    //// if文パターン1
+    //if (dx != 0.0f)
+    //{
+    //    if (dy != 0.0f)
+    //    {
+    //        if (dz != 0.0f)
+    //        {
+    //            t[0] = (2.0f / dx);
+    //            t[5] = (2.0f / dy);
+    //            t[10] = -(2.0f / dz);
+    //            t[12] = -((aRight + aLeft) / dx);
+    //            t[13] = -((aTop + aBottom) / dy);
+    //            t[14] = -((aZFar + aZNear) / dz);
+    //        }
+    //    }
+    //}
+    //return t;
 
-    // if文パターン2
-    // 関数化するために抜き出しやすい
-    if (dx == 0.0f)
-    {
-        return t;
-    }
+    //// if文パターン2
+    //// 関数化するために抜き出しやすい
+    //if (dx == 0.0f)
+    //{
+    //    return t;
+    //}
 
-    if (dy == 0.0f)
-    {
-        return t;
-    }
+    //if (dy == 0.0f)
+    //{
+    //    return t;
+    //}
 
-    if (dz == 0.0f)
-    {
-        return t;
-    }
-    
+    //if (dz == 0.0f)
+    //{
+    //    return t;
+    //}
+    //
+    //t[0] = (2.0f / dx);
+    //t[5] = (2.0f / dy);
+    //t[10] = -(2.0f / dz);
+    //t[12] = -((aRight + aLeft) / dx);
+    //t[13] = -((aTop + aBottom) / dy);
+    //t[14] = -((aZFar + aZNear) / dz);
+
+    //return t;
+
+    //// if文パターン3
+    //if (dx != 0.0f && dy != 0.0f && dz != 0.0f)
+    //{
+    //    t[0] = (2.0f / dx);
+    //    t[5] = (2.0f / dy);
+    //    t[10] = -(2.0f / dz);
+    //    t[12] = -((aRight + aLeft) / dx);
+    //    t[13] = -((aTop + aBottom) / dy);
+    //    t[14] = -((aZFar + aZNear) / dz);
+    //}
+
+    // if文パターン4 採用
+    assert(dx != 0.0f); // assert　こうであって欲しい
+    assert(dy != 0.0f);
+    assert(dz != 0.0f);
+    //assert(dx != 0.0f && dy != 0.0f && dz != 0.0f); //まとめてもOK
     t[0] = (2.0f / dx);
     t[5] = (2.0f / dy);
     t[10] = -(2.0f / dz);

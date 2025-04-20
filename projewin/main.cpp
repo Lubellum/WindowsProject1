@@ -185,7 +185,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         const CMatrix scaling = CMatrix::Scale(scale / size[0], scale / size[1], 1.0f);
         const GLfloat w = (size[0] / scale);
         const GLfloat h = (size[1] / scale);
-        const CMatrix projection = CMatrix::Orthogonal(-w, w, -h, h, 1.0f, 10.0f);
+        const CMatrix projection = CMatrix::Orthogonal(w, w, -h, h, 1.0f, 10.0f);
 
         // 平行移動の変換行列を求める
         const GLfloat* const position = window->GetLocation();

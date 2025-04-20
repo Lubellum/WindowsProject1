@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <GL/glew.h>
 #include <cmath>
+#include <cassert>
 
 // •ÏŠ·s—ñ
 class CMatrix
