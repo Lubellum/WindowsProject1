@@ -265,3 +265,26 @@ CMatrix CMatrix::Orthogonal(GLfloat aLeft, GLfloat aRight,
 
     return t;
 }
+
+CMatrix CMatrix::Frustum(GLfloat aLeft, GLfloat aRight, GLfloat aBottom, GLfloat aTop, GLfloat aZNear, GLfloat aZFar)
+{
+    CMatrix t;
+    const GLfloat dx = (aRight - aLeft);
+    const GLfloat dy = (aTop - aBottom);
+    const GLfloat dz = (aZFar - aZNear);
+
+    assert(dx != 0.0f);
+    assert(dy != 0.0f);
+    assert(dz != 0.0f);
+
+    t[0] = ((2.0f * aZNear) / dx);
+    t[5] = ((2.0f * aZNear) / dy);
+    t[8] = ((aRight + aLeft) / dx);
+    t[9] = ((aTop + aBottom) / dy);
+    t[10] = -((aZFar + aZNear) / dz);
+    t[11] = -1.0f;
+    t[14] = -((2.0f * aZFar * aZNear) / dz);
+    t[15] = 0.0f;
+
+    return t;
+}
