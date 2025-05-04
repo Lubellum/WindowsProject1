@@ -51,7 +51,11 @@ public:
 							  GLfloat aBottom, GLfloat aTop,
 							  GLfloat aZNear, GLfloat aZFar);
 
-	static CMatrix Frustum(GLfloat aLeft, GLfloat aRight, GLfloat aBottom, GLfloat atop, GLfloat aZNear, GLfloat aZFar);
+	static CMatrix Frustum(GLfloat aLeft, GLfloat aRight,
+						   GLfloat aBottom, GLfloat atop,
+						   GLfloat aZNear, GLfloat aZFar);
+
+	static CMatrix Perspective(GLfloat aFovy, GLfloat aAspect, GLfloat aZNear, GLfloat aZFar);
 
 private:
 	GLfloat mMatrix[16];

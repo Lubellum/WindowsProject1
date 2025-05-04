@@ -181,12 +181,15 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // 拡大縮小の変換行列を求める
          // 直交投影変換行列を求める
         const GLfloat* const size = window->GetSize();
-        const GLfloat scale = (window->GetScale() * 2.0f);
-        const CMatrix scaling = CMatrix::Scale(scale / size[0], scale / size[1], 1.0f);
-        const GLfloat w = (size[0] / scale);
-        const GLfloat h = (size[1] / scale);
+        //const GLfloat scale = (window->GetScale() * 2.0f);
+        //const CMatrix scaling = CMatrix::Scale(scale / size[0], scale / size[1], 1.0f);
+        //const GLfloat w = (size[0] / scale);
+        //const GLfloat h = (size[1] / scale);
         //const CMatrix projection = CMatrix::Orthogonal(-w, w, -h, h, 1.0f, 10.0f);
-        const CMatrix projection = CMatrix::Frustum(-w, w, -h, h, 1.0f, 10.0f);
+        //const CMatrix projection = CMatrix::Frustum(-w, w, -h, h, 1.0f, 10.0f);
+        const GLfloat fovy = (window->GetScale() * 0.01f);
+        const GLfloat aspect = (size[0] / size[1]);
+        const CMatrix projection = CMatrix::Perspective(fovy, aspect, 1.0f, 10.0f);
 
         // 平行移動の変換行列を求める
         const GLfloat* const position = window->GetLocation();

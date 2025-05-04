@@ -288,3 +288,21 @@ CMatrix CMatrix::Frustum(GLfloat aLeft, GLfloat aRight, GLfloat aBottom, GLfloat
 
     return t;
 }
+
+CMatrix CMatrix::Perspective(GLfloat aFovy, GLfloat aAspect, GLfloat aZNear, GLfloat aZFar)
+{
+    CMatrix t;
+    const GLfloat dz = (aZFar - aZNear);
+
+    assert(dz != 0.0f);
+
+    GLfloat y = (1.0f / tan(aFovy * 0.5f));
+    t[0] = y / aAspect;
+    t[5] = y;
+    t[10] = -((aZFar - aZNear) / dz);
+    t[11] = -1.0f;
+    t[14] = -((2.0f * aZFar * aZNear) / dz);
+    t[15] = 0.0f;
+
+    return t;
+}
