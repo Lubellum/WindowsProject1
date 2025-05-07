@@ -9,7 +9,7 @@ public:
     struct tVertex
     {
         // 位置
-        GLfloat mPosition[2];
+        GLfloat mPosition[3];
     };
 
     // コンストラクタ

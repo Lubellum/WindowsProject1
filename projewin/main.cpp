@@ -90,6 +90,40 @@ static constexpr CObject::tVertex vertex[] =
 //    {   0.5f, -0.5f }
 //};
 
+#define VERTEX0 {  0.0f,  1.0f,  0.0f }
+#define VERTEX1 { -1.0f,  0.0f,  0.0f }
+#define VERTEX2 {  0.0f,  0.0f,  1.0f }
+#define VERTEX3 {  0.0f, -1.0f,  0.0f }
+#define VERTEX4 {  1.0f,  0.0f,  0.0f }
+#define VERTEX5 {  0.0f,  0.0f, -1.0f }
+
+// staticで変数を使うパターンもある
+//static constexpr CObject::tVertex vertex0 = { 0.0f,  1.0f,  0.0f };
+
+static constexpr CObject::tVertex octahedronVertex[] =
+{
+    //vertex0,
+    VERTEX0,
+    VERTEX1,
+    VERTEX3,
+    VERTEX4,
+    VERTEX0,
+    VERTEX2,
+    VERTEX3,
+    VERTEX5,
+    VERTEX1,
+    VERTEX2,
+    VERTEX4,
+    VERTEX5
+};
+
+#undef VERTEX0
+#undef VERTEX1
+#undef VERTEX2
+#undef VERTEX3
+#undef VERTEX4
+#undef VERTEX5
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -164,7 +198,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     const GLint projectionLoc = glGetUniformLocation(program, "projection");
 
     // todo:
-    Shape * shape = new Shape( 2, 4, vertex);
+    Shape * shape = new Shape(3, 12, octahedronVertex);
 
     while ( window->IsActive() )
     {
