@@ -4,7 +4,7 @@
 // 図形データ
 #include "Object.h"
 // 図形の描画
-class Shape
+class CShape
 {
 public:
     // コンストラクタ
@@ -13,9 +13,9 @@ public:
     // vertex: 頂点属性を格納した配列
     // indexcount: 頂点のインデックスの要素数
     // index: 頂点のインデックスを格納した配列
-    Shape(GLint aSize, GLsizei aVertexcount, const CObject::tVertex* aVertex, GLsizei aIndexcount, const GLuint* aIndex);
+    CShape(GLint aSize, GLsizei aVertexcount, const CObject::tVertex* aVertex, GLsizei aIndexcount, const GLuint* aIndex);
 
-    ~Shape();
+    ~CShape();
     // 描画
     void Draw() const;
     // 描画の実行

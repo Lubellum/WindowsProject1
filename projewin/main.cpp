@@ -198,7 +198,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     const GLint projectionLoc = glGetUniformLocation(program, "projection");
 
     // todo:
-    //Shape * shape = new Shape(3, 12, octahedronVertex);
+    //CShape * shape = new Shape(3, 12, octahedronVertex);
 
     while ( window->IsActive() )
     {

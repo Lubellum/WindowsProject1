@@ -6,18 +6,18 @@
 // vertex: 頂点属性を格納した配列
 // indexcount: 頂点のインデックスの要素数
 // index: 頂点のインデックスを格納した配列
-Shape::Shape(GLint aSize, GLsizei aVertexcount, const CObject::tVertex* aVertex, GLsizei aIndexcount, const GLuint* aIndex)
+CShape::CShape(GLint aSize, GLsizei aVertexcount, const CObject::tVertex* aVertex, GLsizei aIndexcount, const GLuint* aIndex)
     : mObject(new CObject(aSize, aVertexcount, aVertex, 0, nullptr))
     , mVertexcount(aVertexcount)
 {
 }
 
-Shape::~Shape()
+CShape::~CShape()
 {
 }
 
 // 描画
-void Shape::Draw() const
+void CShape::Draw() const
 {
     // 頂点配列オブジェクトを結合する
     mObject->Bind();
@@ -26,7 +26,7 @@ void Shape::Draw() const
 }
 
 // 描画の実行
-void Shape::Execute() const
+void CShape::Execute() const
 {
     // 折れ線で描画する
     glDrawArrays(GL_LINE_LOOP, 0, mVertexcount);
