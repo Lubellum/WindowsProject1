@@ -16,7 +16,8 @@ public:
     // size: 頂点の位置の次元
     // vertexcount: 頂点の数
     // vertex: 頂点属性を格納した配列
-    CObject(GLint aSize, GLsizei aVertexcount, const tVertex* aVertex);
+    CObject(GLint aSize, GLsizei aVertexcount, const tVertex* aVertexGLsizei, GLsizei aIndexcount, const GLuint* aIndex);
+    
     // デストラクタ
     virtual ~CObject();
 
@@ -33,4 +34,6 @@ private:
     GLuint mVao;
     // 頂点バッファオブジェクト名
     GLuint mVbo;
+    // インデックスの頂点バッファオブジェクト
+    GLuint mIbo;
 };

@@ -6,17 +6,27 @@
 // size: 頂点の位置の次元
 // vertexcount: 頂点の数
 // vertex: 頂点属性を格納した配列
-CObject::CObject(GLint aSize, GLsizei aVertexcount, const tVertex* aVertex)
+// indexcount: 頂点のインデックスの要素数
+// index: 頂点のインデックスを格納した配列
+CObject::CObject(GLint aSize, GLsizei aVertexcount, const tVertex* aVertex, GLsizei aIndexcount, const GLuint * aIndex)
     : mVao(), mVbo()
 {
     // 頂点配列オブジェクト
     glGenVertexArrays(1, &mVao);
     glBindVertexArray(mVao);
+    
     // 頂点バッファオブジェクト
     glGenBuffers(1, &mVbo);
     glBindBuffer(GL_ARRAY_BUFFER, mVbo);
-    glBufferData(GL_ARRAY_BUFFER,
-        aVertexcount * sizeof(tVertex), aVertex, GL_STATIC_DRAW);
+    GLsizeiptr vertexCount = aVertexcount * sizeof(tVertex);
+    glBufferData(GL_ARRAY_BUFFER, vertexCount, aVertex, GL_STATIC_DRAW);
+
+    // インデックスの頂点バッファオブジェクト
+    glGenBuffers(1, &mIbo);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, mIbo);
+    GLuint edgeTableSize = aIndexcount * sizeof(GLuint);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, edgeTableSize, aIndex, GL_STATIC_DRAW);
+    
     // 結合されている頂点バッファオブジェクトを in 変数から参照できるようにする
     glVertexAttribPointer(0, aSize, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0);
@@ -30,8 +40,12 @@ CObject::~CObject()
 {
     // 頂点配列オブジェクトを削除する
     glDeleteVertexArrays(1, &mVao);
+    
     // 頂点バッファオブジェクトを削除する
     glDeleteBuffers(1, &mVbo);
+    
+    // インデックスの頂点バッファオブジェクトを削除する
+    glDeleteBuffers(1, &mIbo);
 }
 
 // 頂点配列オブジェクトの結合

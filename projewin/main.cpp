@@ -198,7 +198,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     const GLint projectionLoc = glGetUniformLocation(program, "projection");
 
     // todo:
-    Shape * shape = new Shape(3, 12, octahedronVertex);
+    //Shape * shape = new Shape(3, 12, octahedronVertex);
 
     while ( window->IsActive() )
     {
@@ -254,7 +254,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projection.Data());
         glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelView.Data());
 
-        shape->Draw();
+        //shape->Draw(); // todo
         window->SwapBuffers();
         glfwPollEvents();
         //glfwWaitEvents();
