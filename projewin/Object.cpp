@@ -1,4 +1,3 @@
-#pragma once
 #include "Object.h"
 //#include "iostream" 自分の周りを調べて、無ければ標準ライブラリを見に行く
 

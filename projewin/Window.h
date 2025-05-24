@@ -14,6 +14,7 @@ public:
 	bool IsActive();
 	void Update();
 	void SwapBuffers() const;
+	// todo: staticな関数はコンストラクタの上に書く
 	static void Resize(GLFWwindow* const aWindow, const int aWidth, const int aHeight);
 	static void Wheel(GLFWwindow* const aWindow, double aX, double aY);
 	GLfloat Correct(const GLfloat aScale, GLfloat aMin, GLfloat aMax);

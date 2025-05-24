@@ -11,6 +11,7 @@
 #include "Shape.h"
 #include "Window.h"
 #include "Matrix.h"
+#include "Hexagon.h"
 #include <windows.h>
 #include <cstdlib>
 #include <fstream>
@@ -199,6 +200,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // todo:
     //CShape * shape = new Shape(3, 12, octahedronVertex);
+    // 図形データを作成する
+    CShape * shape = new CHexagon();
+
 
     while ( window->IsActive() )
     {
