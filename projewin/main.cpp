@@ -55,20 +55,6 @@ std::string ReadFile(std::string path)
     return source;
 }
 
-//struct Vertex
-//{
-//    //GLfloat position[4];
-//    GLfloat position[2];
-//};
-
-//static constexpr CObject::tVertex vertex[] =
-//{
-//    { -0.5f, -0.5f },
-//    {  0.5f, -0.5f },
-//    {  0.5f,  0.5f },
-//    { -0.5f,  0.5f }
-//};
-
 static constexpr CObject::tVertex vertex[] =
 {
     { -2.0f, -2.0f },
@@ -76,20 +62,6 @@ static constexpr CObject::tVertex vertex[] =
     {  2.0f,  2.0f },
     { -2.0f,  2.0f }
 };
-
-//static constexpr Vertex vertex[] =
-//{
-//    {   0.0f,  0.5f, 0.0f, 1.0f },
-//    {  -0.5f, -0.5f, 0.0f, 1.0f },
-//    {   0.5f, -0.5f, 0.0f, 1.0f }
-//};
-
-//static constexpr CObject::tVertex vertex[] =
-//{
-//    {   0.0f,  0.5f },
-//    {  -0.5f, -0.5f },
-//    {   0.5f, -0.5f }
-//};
 
 #define VERTEX0 {  0.0f,  1.0f,  0.0f }
 #define VERTEX1 { -1.0f,  0.0f,  0.0f }
@@ -141,21 +113,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     CWindow* window = new CWindow();
     window->Initialize();
 
-    //98,99行目の内容で代替
-    //GLFWwindow * const window = glfwCreateWindow(1920, 1280, "Sample", NULL, NULL);
-    //glfwMakeContextCurrent(window);
-    //glewExperimental = GL_TRUE;
-    //if (glewInit() != GLEW_OK)
-    //{
-    //    // GLEWの初期化に失敗
-    //    std::cerr << "Can't initialize GLEW" << std::endl;
-    //    return 1;
-    //}
     // 後ほど
     //glfwSwapInterval(1);
 
     glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
-    //glViewport(0, 0, 1280, 1280);
 
     const GLuint program = glCreateProgram();
 
@@ -164,9 +125,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //CWindow player2(name);
     //CWindow player3 = CWindow(name);
 
-    //std::string vertShaderPath = "C:/Users/azuky/OneDrive/ドキュメント/GitHub/WindowsProject1/shader/shader.vert";
     std::string vertShaderPath("C:/Users/azuky/OneDrive/ドキュメント/GitHub/WindowsProject1/shader/shader.vert");
-    //std::string vertShaderPath = std::string ("C:/Users/azuky/OneDrive/ドキュメント/GitHub/WindowsProject1/shader/shader.vert");
     std::string vsource = ReadFile(vertShaderPath);
 
     // todo: 共通化できそうだけど、、、まだ
@@ -191,10 +150,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     glBindFragDataLocation(program, 0, "fragment");
     // uniform 変数の場所を取得する
     glLinkProgram(program);
-    //const GLint aspectLoc = glGetUniformLocation(program, "aspect");
-    // const GLint sizeLoc = glGetUniformLocation(program, "size");
-    // const GLint scaleLoc = glGetUniformLocation(program, "scale");
-    // const GLint locationLoc = glGetUniformLocation(program, "location");
     const GLint modelLoc = glGetUniformLocation(program, "model");
     const GLint modelViewLoc = glGetUniformLocation(program, "modelView");
     const GLint projectionLoc = glGetUniformLocation(program, "projection");
@@ -212,11 +167,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         glLineWidth(5.0);
         glUseProgram(program);
         window->Update();
-        //glUniform1f(aspectLoc, window->GetAspect());
-        // glUniform2fv(sizeLoc, 1, window->GetSize());
-        // glUniform1f(scaleLoc, window->GetScale());
-        // glUniform2fv(locationLoc, 1, window->GetLocation());
-        // 
         // 拡大縮小の変換行列を求める
          // 直交投影変換行列を求める
         const GLfloat* const size = window->GetSize();
