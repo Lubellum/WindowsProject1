@@ -5,14 +5,14 @@ const GLsizei CHexagon::mCubeVertexCount = 8;
 // òZñ ëÃÇÃí∏ì_ÇÃà íu
 const CObject::tVertex CHexagon::mCubeVertex[mCubeVertexCount] =
 {
-    { -1.0f, -1.0f, -1.0f }, // (0)
-    { -1.0f, -1.0f,  1.0f }, // (1)
-    { -1.0f,  1.0f,  1.0f }, // (2)
-    { -1.0f,  1.0f, -1.0f }, // (3)
-    {  1.0f,  1.0f, -1.0f }, // (4)
-    {  1.0f, -1.0f, -1.0f }, // (5)
-    {  1.0f, -1.0f,  1.0f }, // (6)
-    {  1.0f,  1.0f,  1.0f }  // (7)
+    { -1.0f, -1.0f, -1.0f, 0.0f, 0.0f, 0.0f }, // (0)
+    { -1.0f, -1.0f,  1.0f, 0.0f, 0.0f, 0.8f }, // (1)
+    { -1.0f,  1.0f,  1.0f, 0.0f, 0.8f, 0.0f }, // (2)
+    { -1.0f,  1.0f, -1.0f, 0.0f, 0.8f, 0.8f }, // (3)
+    {  1.0f,  1.0f, -1.0f, 0.8f, 0.0f, 0.0f }, // (4)
+    {  1.0f, -1.0f, -1.0f, 0.8f, 0.0f, 0.8f }, // (5)
+    {  1.0f, -1.0f,  1.0f, 0.8f, 0.8f, 0.0f }, // (6)
+    {  1.0f,  1.0f,  1.0f, 0.8f, 0.8f, 0.8f }  // (7)
 };
 
 const GLsizei CHexagon::mWireCubeIndexCount = 24;
@@ -64,4 +64,11 @@ CHexagon::CHexagon()
 
 CHexagon::~CHexagon()
 {
+}
+
+// ï`âÊÇÃé¿çs
+void CHexagon::Execute() const
+{
+    // ê¸ï™åQÇ≈ï`âÊÇ∑ÇÈ
+    glDrawElements(GL_LINES, mWireCubeIndexCount, GL_UNSIGNED_INT, 0);
 }

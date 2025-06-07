@@ -13,6 +13,9 @@ public:
 	CHexagon();
 	~CHexagon();
 
+	// ï`âÊÇÃé¿çs
+	virtual void Execute() const override;
+
 private:
 	static const GLsizei mCubeVertexCount;
 	static const CObject::tVertex mCubeVertex[];

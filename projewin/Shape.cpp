@@ -7,7 +7,7 @@
 // indexcount: 頂点のインデックスの要素数
 // index: 頂点のインデックスを格納した配列
 CShape::CShape(GLint aSize, GLsizei aVertexcount, const CObject::tVertex* aVertex, GLsizei aIndexcount, const GLuint* aIndex)
-    : mObject(new CObject(aSize, aVertexcount, aVertex, 0, nullptr))
+    : mObject(new CObject(aSize, aVertexcount, aVertex, aIndexcount, aIndex))
     , mVertexcount(aVertexcount)
 {
 }

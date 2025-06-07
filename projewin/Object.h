@@ -10,6 +10,9 @@ public:
     {
         // 位置
         GLfloat mPosition[3];
+
+        // 色
+        GLfloat mColor[3];
     };
 
     // コンストラクタ

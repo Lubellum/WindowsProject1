@@ -187,6 +187,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     glAttachShader(program, fobj);
 
     glBindAttribLocation(program, 0, "position");
+    glBindAttribLocation(program, 1, "color");
     glBindFragDataLocation(program, 0, "fragment");
     // uniform 変数の場所を取得する
     glLinkProgram(program);
@@ -258,7 +259,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projection.Data());
         glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelView.Data());
 
-        //shape->Draw(); // todo
+        shape->Draw();
         window->SwapBuffers();
         glfwPollEvents();
         //glfwWaitEvents();
