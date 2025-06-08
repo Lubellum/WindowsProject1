@@ -58,7 +58,7 @@ const GLuint CHexagon::mWireCubeIndex[mWireCubeIndexCount] =
 
 
 CHexagon::CHexagon()
-    : CShape(3, mCubeVertexCount, mCubeVertex,mWireCubeIndexCount, mWireCubeIndex)
+    : CShape(mCubeVertexCount, mCubeVertex,mWireCubeIndexCount, mWireCubeIndex)
 {
 }
 

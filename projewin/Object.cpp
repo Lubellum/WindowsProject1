@@ -2,12 +2,11 @@
 //#include "iostream" 自分の周りを調べて、無ければ標準ライブラリを見に行く
 
 // コンストラクタ
-// size: 頂点の位置の次元
 // vertexcount: 頂点の数
 // vertex: 頂点属性を格納した配列
 // indexcount: 頂点のインデックスの要素数
 // index: 頂点のインデックスを格納した配列
-CObject::CObject(GLint aSize, GLsizei aVertexcount, const tVertex* aVertex, GLsizei aIndexcount, const GLuint* aIndex)
+CObject::CObject(GLsizei aVertexcount, const tVertex* aVertex, GLsizei aIndexcount, const GLuint* aIndex)
     : mVao(), mVbo()
 {
     // 頂点配列オブジェクト
@@ -27,7 +26,7 @@ CObject::CObject(GLint aSize, GLsizei aVertexcount, const tVertex* aVertex, GLsi
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, edgeTableSize, aIndex, GL_STATIC_DRAW);
 
     // 結合されている頂点バッファオブジェクトを in 変数から参照できるようにする
-    glVertexAttribPointer(0, aSize, GL_FLOAT, GL_FALSE, sizeof(tVertex), static_cast<tVertex*>(0)->mPosition);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(tVertex), static_cast<tVertex*>(0)->mPosition);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(1, 3 , GL_FLOAT, GL_FALSE, sizeof(tVertex), static_cast<tVertex*>(0)->mColor);
     glEnableVertexAttribArray(1);
