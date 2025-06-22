@@ -12,6 +12,7 @@
 #include "Window.h"
 #include "Matrix.h"
 #include "Hexagon.h"
+#include "FilledHexagon.h"
 #include <windows.h>
 #include <cstdlib>
 #include <fstream>
@@ -116,7 +117,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 後ほど
     //glfwSwapInterval(1);
 
-    glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 
     const GLuint program = glCreateProgram();
 
@@ -157,7 +158,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // todo:
     //CShape * shape = new Shape(3, 12, octahedronVertex);
     // 図形データを作成する
-    CShape * shape = new CHexagon();
+    CShape* shape = new CFilledHexagon();
+    //CShape* shape = new CHexagon();
 
 
     while ( window->IsActive() )

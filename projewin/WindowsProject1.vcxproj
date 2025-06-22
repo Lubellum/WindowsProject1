@@ -130,6 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="FilledHexagon.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Hexagon.h" />
     <ClInclude Include="Matrix.h" />
@@ -141,6 +142,7 @@
     <ClInclude Include="WindowsProject1.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FilledHexagon.cpp" />
     <ClCompile Include="Hexagon.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
