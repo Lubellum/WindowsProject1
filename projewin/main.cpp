@@ -111,6 +111,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     glfwInit();
     glfwDefaultWindowHints();
+    glfwWindowHint(GLFW_DEPTH_BITS, 24);
     CWindow* window = new CWindow();
     window->Initialize();
 
@@ -118,6 +119,13 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //glfwSwapInterval(1);
 
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+
+    // Zバッファの有効化
+    glEnable(GL_DEPTH_TEST);
+    // 背面カリングを有効にする
+    glFrontFace(GL_CCW);
+    glCullFace(GL_BACK);
+    glEnable(GL_CULL_FACE);
 
     const GLuint program = glCreateProgram();
 
@@ -161,10 +169,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     CShape* shape = new CFilledHexagon();
     //CShape* shape = new CHexagon();
 
+    //タイマーを0にセット
+    glfwSetTime(0.0);
 
     while ( window->IsActive() )
     {
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glLineWidth(5.0);
         glUseProgram(program);
@@ -189,7 +199,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // モデル変換行列を求める
         //const CMatrix model = translation * scaling;
         const GLfloat* const location = window->GetLocation();
-        const CMatrix model = CMatrix::Translate(location[0], location[1], 0.0f);
+        const CMatrix r = CMatrix::Rotate(static_cast<GLfloat>(glfwGetTime() * 0.5), 1.0f, 0.0f, 0.0f);
+        const CMatrix model = CMatrix::Translate(location[0], location[1], 0.0f) * r;
 
         // ビュー変換行列を求める
         //const CMatrix view = CMatrix::LookAt(
@@ -212,6 +223,16 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelView.Data());
 
         shape->Draw();
+
+        // 二つ目のモデルビュー変換行列を求める
+        const CMatrix modelview1 = modelView * CMatrix::Translate(0.0f, 0.0f, 3.0f);
+
+        // uniform 変数に値を設定する
+        glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelview1.Data());
+
+        // 二つ目の図形を描画する
+        shape->Draw();
+
         window->SwapBuffers();
         glfwPollEvents();
         //glfwWaitEvents();
