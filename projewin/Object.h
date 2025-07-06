@@ -11,8 +11,8 @@ public:
         // 位置
         GLfloat mPosition[3];
 
-        // 色
-        GLfloat mColor[3];
+        // 法線
+        GLfloat mNormal[3];
     };
 
     // コンストラクタ

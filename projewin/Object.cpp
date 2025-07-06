@@ -28,7 +28,7 @@ CObject::CObject(GLsizei aVertexcount, const tVertex* aVertex, GLsizei aIndexcou
     // 結合されている頂点バッファオブジェクトを in 変数から参照できるようにする
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(tVertex), static_cast<tVertex*>(0)->mPosition);
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(1, 3 , GL_FLOAT, GL_FALSE, sizeof(tVertex), static_cast<tVertex*>(0)->mColor);
+    glVertexAttribPointer(1, 3 , GL_FLOAT, GL_FALSE, sizeof(tVertex), static_cast<tVertex*>(0)->mNormal);
     glEnableVertexAttribArray(1);
 }
 // コピーコンストラクタによるコピー禁止

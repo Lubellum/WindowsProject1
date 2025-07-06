@@ -118,7 +118,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 後ほど
     //glfwSwapInterval(1);
 
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+    // ウィンドウの背景色を変える
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
     // Zバッファの有効化
     glEnable(GL_DEPTH_TEST);
@@ -155,7 +156,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     glAttachShader(program, fobj);
 
     glBindAttribLocation(program, 0, "position");
-    glBindAttribLocation(program, 1, "color");
+    glBindAttribLocation(program, 1, "normal");
     glBindFragDataLocation(program, 0, "fragment");
     // uniform 変数の場所を取得する
     glLinkProgram(program);
@@ -199,7 +200,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // モデル変換行列を求める
         //const CMatrix model = translation * scaling;
         const GLfloat* const location = window->GetLocation();
-        const CMatrix r = CMatrix::Rotate(static_cast<GLfloat>(glfwGetTime() * 0.5), 1.0f, 0.0f, 0.0f);
+        const CMatrix r = CMatrix::Rotate(static_cast<GLfloat>(glfwGetTime() * 0.5), 0.0f, 1.0f, 0.0f); //回転軸
         const CMatrix model = CMatrix::Translate(location[0], location[1], 0.0f) * r;
 
         // ビュー変換行列を求める
@@ -229,6 +230,51 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         // uniform 変数に値を設定する
         glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelview1.Data());
+
+        // 二つ目の図形を描画する
+        shape->Draw();
+
+        // 二つ目のモデルビュー変換行列を求める
+        const CMatrix modelview2 = modelView * CMatrix::Translate(0.0f, 0.0f, -3.0f);
+
+        // uniform 変数に値を設定する
+        glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelview2.Data());
+
+        // 二つ目の図形を描画する
+        shape->Draw();
+
+        // 二つ目のモデルビュー変換行列を求める
+        const CMatrix modelview3 = modelView * CMatrix::Translate(0.0f, 3.0f, 0.0f);
+
+        // uniform 変数に値を設定する
+        glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelview3.Data());
+
+        // 二つ目の図形を描画する
+        shape->Draw();
+
+        // 二つ目のモデルビュー変換行列を求める
+        const CMatrix modelview4 = modelView * CMatrix::Translate(0.0f, -3.0f, 0.0f);
+
+        // uniform 変数に値を設定する
+        glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelview4.Data());
+
+        // 二つ目の図形を描画する
+        shape->Draw();
+
+        // 二つ目のモデルビュー変換行列を求める
+        const CMatrix modelview5 = modelView * CMatrix::Translate(3.0f, 0.0f, 0.0f);
+
+        // uniform 変数に値を設定する
+        glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelview5.Data());
+
+        // 二つ目の図形を描画する
+        shape->Draw();
+
+        // 二つ目のモデルビュー変換行列を求める
+        const CMatrix modelview6 = modelView * CMatrix::Translate(-3.0f, 0.0f, 0.0f);
+
+        // uniform 変数に値を設定する
+        glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelview6.Data());
 
         // 二つ目の図形を描画する
         shape->Draw();
