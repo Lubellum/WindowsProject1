@@ -24,6 +24,9 @@ public:
 	// 変換行列の配列を返す
 	const GLfloat* Data() const;
 
+	// 法線ベクトルの変換行列を求める
+	void getNormalMatrix(GLfloat* aM) const;
+
 	// 単位行列を設定する
 	void LoadIdentity();
 	

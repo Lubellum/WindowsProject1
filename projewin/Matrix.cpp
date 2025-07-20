@@ -38,6 +38,20 @@ const GLfloat* CMatrix::Data() const
     return mMatrix;
 }
 
+// 法線ベクトルの変換行列を求める
+void CMatrix::getNormalMatrix(GLfloat* aM) const
+{
+    aM[0] = ((mMatrix[ 5] * mMatrix[10]) - (mMatrix[ 6] * mMatrix[ 9]));
+    aM[1] = ((mMatrix[ 6] * mMatrix[ 8]) - (mMatrix[ 4] * mMatrix[10]));
+    aM[2] = ((mMatrix[ 4] * mMatrix[ 9]) - (mMatrix[ 5] * mMatrix[ 8]));
+    aM[3] = ((mMatrix[ 9] * mMatrix[ 2]) - (mMatrix[10] * mMatrix[ 1]));
+    aM[4] = ((mMatrix[10] * mMatrix[ 0]) - (mMatrix[ 8] * mMatrix[ 2]));
+    aM[5] = ((mMatrix[ 8] * mMatrix[ 1]) - (mMatrix[ 9] * mMatrix[ 0]));
+    aM[6] = ((mMatrix[ 1] * mMatrix[ 6]) - (mMatrix[ 2] * mMatrix[ 5]));
+    aM[7] = ((mMatrix[ 2] * mMatrix[ 4]) - (mMatrix[ 0] * mMatrix[ 6]));
+    aM[8] = ((mMatrix[ 0] * mMatrix[ 5]) - (mMatrix[ 1] * mMatrix[ 4]));
+}
+
 // 単位行列を設定する
 void CMatrix::LoadIdentity()
 {
