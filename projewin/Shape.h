@@ -1,8 +1,10 @@
 #pragma once
 
 #include <memory>
+#include <vector>
 // 図形データ
 #include "Object.h"
+
 // 図形の描画
 class CShape
 {

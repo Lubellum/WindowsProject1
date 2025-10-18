@@ -131,6 +131,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="FilledHexagon.h" />
+    <ClInclude Include="FilledSphere.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="Hexagon.h" />
     <ClInclude Include="Matrix.h" />
@@ -143,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="FilledHexagon.cpp" />
+    <ClCompile Include="FilledSphere.cpp" />
     <ClCompile Include="Hexagon.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />

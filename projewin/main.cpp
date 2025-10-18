@@ -13,12 +13,14 @@
 #include "Matrix.h"
 #include "Hexagon.h"
 #include "FilledHexagon.h"
+#include "FilledSphere.h"
 #include <windows.h>
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 
 #define MAX_LOADSTRING 100
 
@@ -164,12 +166,21 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     const GLint modelViewLoc = glGetUniformLocation(program, "modelView");
     const GLint projectionLoc = glGetUniformLocation(program, "projection");
     const GLint normalMatrixLoc = glGetUniformLocation(program, "normalMatrix");
+    const GLint lightPositionLoc = glGetUniformLocation(program, "lightPosition");
+    const GLint lightAmbientLoc = glGetUniformLocation(program, "lightAmbient");
+    const GLint lightDiffuseLoc = glGetUniformLocation(program, "lightDiffuse");
+    const GLint lightSpecularLoc = glGetUniformLocation(program, "lightSpecular");
 
-    // todo:
-    //CShape * shape = new Shape(3, 12, octahedronVertex);
     // 図形データを作成する
-    CShape* shape = new CFilledHexagon();
+    //CShape* shape = new CFilledHexagon();
     //CShape* shape = new CHexagon();
+    CShape* shape = new CFilledSphere();
+
+    // 光源データ
+    static const GLfloat lightPosition[] = { 0.0f, 0.0f, 5.0f, 1.0f };
+    static const GLfloat lightAmbient[] = { 0.2f, 0.1f, 0.1f };
+    static const GLfloat lightDiffuse[] = { 1.0f, 0.5f, 0.5f };
+    static const GLfloat lightSpecular[] = { 1.0f, 0.5f, 0.5f };
 
     //タイマーを0にセット
     glfwSetTime(0.0);
@@ -230,6 +241,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         glUniformMatrix4fv(projectionLoc, 1, GL_FALSE, projection.Data());
         glUniformMatrix4fv(modelViewLoc, 1, GL_FALSE, modelView.Data());
         glUniformMatrix3fv(normalMatrixLoc, 1, GL_FALSE, normalMatrix);
+        glUniform4fv(lightPositionLoc, 1, lightPosition);
+        glUniform3fv(lightAmbientLoc, 1, lightAmbient);
+        glUniform3fv(lightDiffuseLoc, 1, lightDiffuse);
+        glUniform3fv(lightSpecularLoc, 1, lightSpecular);
 
         shape->Draw();
 

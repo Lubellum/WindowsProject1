@@ -19,7 +19,7 @@ public:
     // vertexcount: 頂点の数
     // vertex: 頂点属性を格納した配列
     CObject(GLsizei aVertexcount, const tVertex* aVertexGLsizei, GLsizei aIndexcount, const GLuint* aIndex);
-    
+
     // デストラクタ
     virtual ~CObject();
 
